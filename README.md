@@ -21,9 +21,16 @@ node tools/bundle.mjs
 
 ## Deploying
 
-Every push to `main` runs `.github/workflows/deploy.yml`, which checks that the
-scripts parse, copies `index.html`, `css/`, `js/` and `assets/` into a clean
-folder and publishes that to GitHub Pages. Nothing else in the repo is served.
+Live at https://williethewhale.github.io/digital-gardens/ and republished on
+every push to `main`. Who does the publishing depends on
+Settings → Pages → Source:
+
+- **Deploy from a branch** (current): GitHub's own Pages build publishes the
+  repository as it is. `.nojekyll` tells it to serve the files untouched.
+- **GitHub Actions**: `.github/workflows/deploy.yml` takes over and publishes
+  only `index.html`, `css/`, `js/` and `assets/`.
+
+Either way that workflow runs on each push and checks that the scripts parse.
 
 ## Layout
 

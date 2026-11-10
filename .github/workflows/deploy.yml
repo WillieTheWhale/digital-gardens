@@ -18,6 +18,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      source: ${{ steps.pages.outputs.source }}
     steps:
       - uses: actions/checkout@v7
 
@@ -27,19 +29,36 @@ jobs:
             node --check "$f"
           done
 
+      # Settings → Pages → Source decides who publishes:
+      #   "GitHub Actions"        → this workflow does (source = workflow)
+      #   "Deploy from a branch"  → GitHub's own build does (source = legacy)
+      - name: See how Pages is set up
+        id: pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: echo "source=$(gh api "repos/$GITHUB_REPOSITORY/pages" --jq .build_type)" >> "$GITHUB_OUTPUT"
+
+      - name: Leave publishing to GitHub's own build
+        if: steps.pages.outputs.source != 'workflow'
+        run: echo "::notice::Pages is set to deploy from a branch, so GitHub's own build publishes this push. Switch Settings → Pages → Source to GitHub Actions to publish only the site files from this workflow."
+
       - name: Assemble the site
+        if: steps.pages.outputs.source == 'workflow'
         run: |
           mkdir _site
           cp -r index.html css js assets _site/
 
       - uses: actions/configure-pages@v6
+        if: steps.pages.outputs.source == 'workflow'
 
       - uses: actions/upload-pages-artifact@v5
+        if: steps.pages.outputs.source == 'workflow'
         with:
           path: _site
 
   deploy:
     needs: build
+    if: needs.build.outputs.source == 'workflow'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
