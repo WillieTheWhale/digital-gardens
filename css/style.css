@@ -1,0 +1,179 @@
+/* Digital Gardens — style.css */
+
+@font-face { font-family: "IBM Plex Mono"; font-weight: 500; font-style: normal; font-display: swap; src: url("../assets/fonts/ibm-plex-mono-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Instrument Serif"; font-weight: 400; font-style: normal; font-display: swap; src: url("../assets/fonts/instrument-serif-latin-400-normal.woff2") format("woff2"); }
+
+:root {
+  --paper: #e9ebed;          /* light grey, tipped cool so it can never read as beige */
+  --ink: #11161a;
+  --soft: #4b545b;
+  --mute: #7a838a;
+  --leaf: #177a49;
+  --serif: "Instrument Serif", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --pad: clamp(20px, 5.2vw, 88px);
+  /* side gutters also clear a notch or system bar on phones held sideways */
+  --pad-l: max(var(--pad), env(safe-area-inset-left, 0px));
+  --pad-r: max(var(--pad), env(safe-area-inset-right, 0px));
+  --ease: cubic-bezier(.2, .7, .15, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { background: var(--paper); -webkit-text-size-adjust: 100%; }
+html.turning { cursor: grabbing; user-select: none; -webkit-user-select: none; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(19px, 1.55vw, 23px);
+  line-height: 1.32;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection { background: #c5e3bd; color: var(--ink); }
+a { color: inherit; text-decoration: none; }
+:focus-visible { outline: 1px solid var(--leaf); outline-offset: 5px; }
+
+/* ---------- the drawing ---------- */
+#garden {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100lvh;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+.ready #garden { opacity: 1; }
+
+/* ---------- top bar ---------- */
+.bar {
+  position: absolute;
+  z-index: 10;
+  top: 0; left: 0; right: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-block: clamp(18px, 2.4vw, 30px);
+  padding-left: var(--pad-l);
+  padding-right: var(--pad-r);
+  font-size: clamp(19px, 1.5vw, 22px);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  pointer-events: none;
+}
+.bar > * { pointer-events: auto; }
+.bar nav { display: flex; gap: clamp(18px, 2.2vw, 32px); align-items: baseline; }
+.bar nav a, .bar nav button {
+  font: inherit;
+  letter-spacing: inherit;
+  color: var(--soft);
+  background: none;
+  border: 0;
+  padding: 4px 0;
+  cursor: pointer;
+  transition: color .3s;
+}
+.bar nav a:hover, .bar nav button:hover { color: var(--ink); }
+.bar nav button::after {
+  content: "";
+  display: inline-block;
+  width: 5px; height: 5px;
+  margin-left: 7px;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  vertical-align: 0.16em;
+  transition: background .3s, border-color .3s;
+}
+.bar nav button[aria-pressed="true"] { color: var(--ink); }
+.bar nav button[aria-pressed="true"]::after { background: var(--leaf); border-color: var(--leaf); }
+
+/* ---------- stages ---------- */
+main { position: relative; z-index: 2; }
+
+.stage {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  align-items: center;
+  padding-block: 16vh;
+  padding-left: var(--pad-l);
+  padding-right: var(--pad-r);
+}
+.stage + .stage { margin-top: 55vh; }
+
+.copy { max-width: 25.5em; }
+.stage[data-side="right"] .copy { justify-self: end; }
+
+h1, h2 {
+  margin: 0;
+  font-weight: 400;
+  letter-spacing: -0.024em;
+  text-wrap: balance;
+}
+h1 { font-size: clamp(52px, 7.6vw, 128px); line-height: 0.9; }
+h2 { font-size: clamp(40px, 4.7vw, 74px); line-height: 0.95; }
+
+.copy p { margin: 1.25em 0 0; max-width: 21em; color: var(--soft); text-wrap: pretty; }
+
+/* hero */
+.hero { align-items: end; padding-bottom: clamp(56px, 10vh, 120px); }
+.hero .copy { max-width: min(47rem, 58vw); }
+
+/* closing */
+.closing { justify-items: center; text-align: center; align-items: end; padding-bottom: 16vh; min-height: 112vh; }
+.closing .copy { max-width: 40rem; }
+.closing .copy p { margin-left: auto; margin-right: auto; }
+.cta {
+  display: inline-block;
+  padding-bottom: 3px;
+  color: var(--ink);
+  border-bottom: 1px solid currentColor;
+  transition: color .3s;
+}
+.cta:hover { color: var(--leaf); }
+
+/* copy arrives a line at a time (only once scripts are running, so it is never lost without them) */
+.js .copy > * { opacity: 0; transform: translateY(18px); transition: opacity 1.2s var(--ease), transform 1.2s var(--ease); }
+.js .copy.in > * { opacity: 1; transform: none; }
+.js .copy.in > :nth-child(2) { transition-delay: .12s; }
+
+/* ---------- footer ---------- */
+.foot {
+  position: relative;
+  z-index: 2;
+  padding-block: 0 26px;
+  padding-left: var(--pad-l);
+  padding-right: var(--pad-r);
+  font-size: 16px;
+  color: var(--mute);
+}
+
+/* ---------- narrow screens: drawing above, words below ---------- */
+@media (max-width: 760px), (max-aspect-ratio: 19/20) {
+  .stage { align-items: end; padding-top: 0; padding-bottom: 11vh; }
+  .stage[data-side="right"] .copy { justify-self: start; }
+  .stage + .stage { margin-top: 50vh; }
+  .hero { padding-bottom: 56px; }
+  .hero .copy { max-width: none; }
+  h1 { font-size: clamp(46px, 13.4vw, 78px); }
+  h2 { font-size: clamp(38px, 10.4vw, 60px); }
+  .closing { text-align: left; justify-items: start; }
+  .closing .copy p { margin-left: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .copy > * { transition-duration: .01s; transform: none; }
+  html { scroll-behavior: auto; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}

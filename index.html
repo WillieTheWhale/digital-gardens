@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Digital Gardens — Offices that grow their own intelligence</title>
+  <meta name="description" content="Digital Gardens buys office buildings, puts two megawatts of compute inside them, and makes the whole building smart — so the companies working there can run their own AI, in-house.">
+  <meta name="theme-color" content="#e9ebed">
+  <meta property="og:title" content="Digital Gardens">
+  <meta property="og:description" content="Offices that grow their own intelligence.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23e9ebed'/%3E%3Cpath d='M16 4v7' stroke='%236d757c' stroke-width='1.5'/%3E%3Cpath d='M16 11c7 1 9 7 6 14-3-1-8-4-6-14z' fill='%23177a49'/%3E%3Cpath d='M16 11c-6 2-8 7-6 12 3-1 7-4 6-12z' fill='%233da552'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+  <canvas id="garden" aria-hidden="true"></canvas>
+
+  <header class="bar">
+    <a class="mark" href="#top">Digital Gardens</a>
+    <nav>
+      <button id="sound" type="button" aria-pressed="false">Sound</button>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <section class="stage hero" data-stage="0">
+      <div class="copy">
+        <h1><span data-carve>Offices that grow their own intelligence.</span></h1>
+        <p><span data-carve>We buy office buildings, put two megawatts of compute inside, and make the whole building smart.</span></p>
+      </div>
+    </section>
+
+    <section class="stage" data-stage="1" data-side="left">
+      <div class="copy">
+        <h2><span data-carve>Your models, inside your walls.</span></h2>
+        <p><span data-carve>Companies run their AI in-house, on hardware a few floors away. Their data and IP never leave the building.</span></p>
+      </div>
+    </section>
+
+    <section class="stage" data-stage="2" data-side="right">
+      <div class="copy">
+        <h2><span data-carve>When the office sleeps, the garden keeps working.</span></h2>
+        <p><span data-carve>Compute nobody is using is sold as open inference, and handed back the moment it&rsquo;s needed.</span></p>
+      </div>
+    </section>
+
+    <section class="stage" data-stage="3" data-side="left">
+      <div class="copy">
+        <h2><span data-carve>The whole building, in context.</span></h2>
+        <p><span data-carve>Long term, every room, screen and keystroke becomes something a company&rsquo;s own AI can see&thinsp;&mdash;&thinsp;captured on-site, and kept there.</span></p>
+      </div>
+    </section>
+
+    <section class="stage closing" data-stage="4" id="contact">
+      <div class="copy">
+        <h2><span data-carve>Come and see what&rsquo;s growing.</span></h2>
+        <p><a class="cta" href="mailto:hello@digitalgardens.example" data-carve>Get in touch</a></p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="foot">&copy; 2026 Digital Gardens</footer>
+
+  <script src="js/engine.js"></script>
+  <script src="js/flora.js"></script>
+  <script src="js/room.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
