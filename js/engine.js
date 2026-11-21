@@ -9,7 +9,7 @@
   'use strict';
   const DG = (window.DG = window.DG || {});
 
-  DG.MONO = '"IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace';
+  DG.MONO = '"Departure Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace';
 
   /* ---------- registries ---------- */
   const PAL = [];
@@ -138,7 +138,7 @@
       a.height = PAL.length * cs;
       const c = a.getContext('2d');
       const fpx = Math.round(cs * 1.2);
-      c.font = `500 ${fpx}px ${DG.MONO}`;
+      c.font = `400 ${fpx}px ${DG.MONO}`;
       c.textAlign = 'center';
       c.textBaseline = 'alphabetic';
       const base = Math.round(cs * 0.5 + fpx * 0.34);

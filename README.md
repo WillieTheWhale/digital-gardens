@@ -42,12 +42,13 @@ Either way that workflow runs on each push and checks that the scripts parse.
 | `js/flora.js` | The hanging planter: how vines and leaves are generated, grow and move |
 | `js/room.js` | Desks, screens, chairs and racks |
 | `js/main.js` | Scene contents, the scroll-driven camera path, pointer and sound |
-| `assets/fonts/` | Instrument Serif and IBM Plex Mono (both SIL OFL, licences alongside) |
+| `assets/fonts/` | Redaction (MCKL, from redaction.us) for all text, and Departure Mono (Helena Zhang, from departuremono.com) for the nav, footer and the drawing. Both SIL OFL, licences alongside |
 
 ## Things you are likely to change
 
 - **Copy** — edit `index.html`. Each `<section data-stage="n">` pairs with entry `n` of `KEYS` in `js/main.js`.
-- **Contact address** — the "Get in touch" link in `index.html` points at a placeholder (`hello@digitalgardens.example`).
+- **Contact address** — the "Get in touch" link in `index.html` (`hello@digitalgardens.space`).
+- **Fonts** — the `@font-face` rules and `--serif` / `--mono` in `css/style.css`, plus `DG.MONO` in `js/engine.js` for the drawing. Departure Mono is drawn on an 11px pixel grid, so keep it at multiples of 5.5px (16.5px, 11px). Redaction also comes in grades that break down into pixels (Redaction 10 to 100); they're in the download from redaction.us if you want one as an accent.
 - **Background** — `--paper` in `css/style.css`.
 - **Plant and furniture colours** — the theme block near the top of `js/engine.js`.
 - **Camera framing per section** — `KEYS` in `js/main.js` (what it looks at, how wide, from where).

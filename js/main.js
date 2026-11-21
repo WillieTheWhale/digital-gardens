@@ -232,7 +232,7 @@
   function marks(t) {
     cs = grid.cs; dpr = grid.dpr;
     ctx.textBaseline = 'alphabetic'; ctx.textAlign = 'left';
-    ctx.font = `500 ${10 * dpr}px ${DG.MONO}`;
+    ctx.font = `400 ${11 * dpr}px ${DG.MONO}`;
 
     // while the plant grows, numbers trail the tip — the way a plotter annotates its own line
     const w0 = sat(1 - stage * 2.5);
@@ -340,7 +340,7 @@
 
   const fonts = document.fonts;
   if (fonts && fonts.load) {
-    Promise.race([fonts.load('500 16px "IBM Plex Mono"'), new Promise((r) => setTimeout(r, 1800))]).then(start, start);
+    Promise.race([fonts.load('400 11px "Departure Mono"'), new Promise((r) => setTimeout(r, 1800))]).then(start, start);
     fonts.ready.then(() => { if (started) { grid.buildAtlas(); measure(); } });
   } else start();
   requestAnimationFrame(frame);
