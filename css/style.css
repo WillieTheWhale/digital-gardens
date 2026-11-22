@@ -61,7 +61,7 @@ a { color: inherit; text-decoration: none; }
   z-index: 10;
   top: 0; left: 0; right: 0;
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   padding-block: clamp(18px, 2.4vw, 30px);
   padding-left: var(--pad-l);
@@ -72,6 +72,8 @@ a { color: inherit; text-decoration: none; }
   pointer-events: none;
 }
 .bar > * { pointer-events: auto; }
+.mark { display: inline-flex; align-items: center; gap: 0.5em; }
+.mark .logo { display: block; width: 1.6em; height: 1.6em; }
 .bar nav { display: flex; gap: clamp(18px, 2.2vw, 32px); align-items: baseline; }
 /* Departure Mono is drawn on an 11px pixel grid: 16.5px lands on it at 2x, the density most screens use */
 .bar nav a, .bar nav button {
