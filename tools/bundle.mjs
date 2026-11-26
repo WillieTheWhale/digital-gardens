@@ -11,9 +11,9 @@ let css = read('css/style.css').replace(/url\("\.\.\/(assets\/fonts\/[^"]+)"\)/g
   `url("data:font/woff2;base64,${readFileSync(join(root, p)).toString('base64')}")`);
 
 let html = read('index.html')
-  .replace(/<link rel="stylesheet" href="css\/style\.css">/, () => `<style>\n${css}\n</style>`)
-  .replace(/<script src="(js\/[^"]+)"><\/script>/g, (_, p) => `<script>\n${read(p)}\n</script>`)
-  .replace(/(src|href)="(assets\/[^"]+\.png)"/g, (_, a, p) =>
+  .replace(/<link rel="stylesheet" href="css\/style\.css(?:\?[^"]*)?">/, () => `<style>\n${css}\n</style>`)
+  .replace(/<script src="(js\/[^"?]+)(?:\?[^"]*)?"><\/script>/g, (_, p) => `<script>\n${read(p)}\n</script>`)
+  .replace(/(src|href)="(assets\/[^"?]+\.png)(?:\?[^"]*)?"/g, (_, a, p) =>
     `${a}="data:image/png;base64,${readFileSync(join(root, p)).toString('base64')}"`);
 
 mkdirSync(join(root, 'dist'), { recursive: true });

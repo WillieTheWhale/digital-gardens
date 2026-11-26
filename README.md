@@ -47,6 +47,7 @@ Either way that workflow runs on each push and checks that the scripts parse.
 
 ## Things you are likely to change
 
+- **After changing CSS, JS or the logo** — bump `?v=` on their links in `index.html` (all share one number). Pages lets browsers cache files for 10 minutes, and without the bump a visitor can get the new page with the old stylesheet.
 - **Copy** — edit `index.html`. Each `<section data-stage="n">` pairs with entry `n` of `KEYS` in `js/main.js`.
 - **Contact address** — the "Get in touch" link in `index.html` (`hello@digitalgardens.space`).
 - **Logo** — replace the three PNGs in `assets/icons/` (same names and sizes). It appears only in the tab and the header.
